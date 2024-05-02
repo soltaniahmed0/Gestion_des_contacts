@@ -316,4 +316,3 @@ function getContacts() {
       return a.nom.localeCompare(b.nom);
     });
   }
-  

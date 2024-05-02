@@ -1,38 +1,19 @@
 body {
-  height: 100vh;
   color: white;
-  width: 100%;
-  /*min-height: 100vh;*/
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("images/bg.png");
-
-  display: flex;
-  flex-direction: column;
-
-  box-sizing: border-box;
   margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 60px;
   padding: 0 2rem 0 4rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /*padding-left: 10px;*/
   background-color: rgba(125, 145, 156, 0.8);
 }
 
 .title {
   text-align: center;
-  height: 20vh;
-  /*flex: 1;*/
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
 }
 
 h1 {
@@ -55,7 +36,8 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-button img {
+
+img {
   height: 30px;
   width: 30px;
   padding: auto;
@@ -64,44 +46,23 @@ button img {
   flex: 1;
   display: grid;
   grid-template-columns: 50% 50%;
-  padding: 2rem 5rem 0 5rem;
+  padding: 2em;
   gap: 1rem;
 }
 .SaveList {
-  display: flex;
-  flex-direction: column;
-
   background-color: rgba(125, 145, 156, 0.8);
-
-  padding: 0;
   height: fit-content; /*nshouf role mteeha*/
-
   border-radius: 5px;
-}
-.contactsContainer {
-  display: flex;
-  flex-direction: column;
-
-  list-style: none;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: 1rem;
-  margin-bottom: 5px;
-
-  padding: 0;
 }
 
 .Contact {
-  list-style: none;
-  display: flex;
-  align-items: center;
+
   border: 2px solid white;
   border-radius: 5px;
   padding-left: 1rem;
   margin-bottom: 5px;
   width: 90%;
-  padding: 0;
-  flex-direction: column;
+
 }
 h3 {
   color: #ffffff;
@@ -120,33 +81,15 @@ h3 {
   font-weight: 500;
   margin-top: 10px;
 }
-.Contact img {
-  width: 18px;
-  height: 18px;
-}
+
 p {
-  color: #ffffff;
-  font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
   padding: 15px;
 }
-.detail_contact {
-  background-color: rgba(125, 145, 156, 0.8);
-  /* padding: 1rem 1rem 1rem 1rem;*/
-  border-radius: 5px;
-  height: fit-content;
-  display: none;
-}
+
 .edit-button {
-  background-color: rgba(227, 80, 12, 0.965);
-  color: white;
-  border-style: solid;
-  border-color: white;
+
   padding: 10px 20px;
   cursor: pointer;
-  float: left;
-  margin: 20px;
-  border-radius: 5px;
 }
 .Contact.selected {
   background-color: rgba(227, 80, 12, 0.965);
@@ -212,6 +155,13 @@ label {
 }
 select:focus > option:checked {
   background: rgba(227, 80, 12, 0.965) !important;
+}
+.detail_contact {
+  background-color: rgba(125, 145, 156, 0.8);
+  /* padding: 1rem 1rem 1rem 1rem;*/
+  border-radius: 5px;
+  height: fit-content;
+  display: none;
 }
 .Formulaire button {
   background-color: rgba(227, 80, 12, 0.965);
