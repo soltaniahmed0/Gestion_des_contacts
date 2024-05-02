@@ -297,7 +297,7 @@ function getContacts() {
         contactElement.classList.add("Contact");
         contactElement.setAttribute("data-telephone", contact.telephone);
         contactElement.innerHTML = `
-                <h5><img src="contact-icon.png" alt="Profil">${contact.nom} ${contact.prenom}</h5>
+                <h5><img src="images/contact-icon.png" alt="Profil">${contact.nom} ${contact.prenom}</h5>
             `;
         contactsContainer.appendChild(contactElement);
       });
