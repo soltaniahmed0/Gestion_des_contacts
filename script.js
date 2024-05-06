@@ -1,22 +1,18 @@
 var addButton = document.getElementById("Add");
-var formulaire = document.querySelector(".Formulaire");
 var detailContact = document.querySelector(".detailContact");
 var saveButton = document.querySelector(".Enregistrer");
-var editButton = document.querySelector(".edit-button");
-var deleteButton = document.querySelector(".btnDelete");
+var editButton = document.querySelector(".edit");
+var deleteButton = document.querySelector(".Delete");
 var contactsContainer = document.querySelector(".contactsContainer");
 var saveList = document.querySelector(".SaveList");
 var noContacts = saveList.querySelector(".noContacts");
 document.addEventListener("DOMContentLoaded",init );
 contactsContainer.addEventListener("click", select);
-
+var form = document.querySelector(".Form");
 function init() {
-    
     editButton.addEventListener("click", editContact);
-  
     saveButton.removeEventListener("click", add_Contacts);
     saveButton.addEventListener("click", saveContact);
-  
     function editContact() {
       var civiliteSpan = document.querySelector(".civilite");
       var nomSpan = document.querySelector(".nom");
@@ -27,7 +23,7 @@ function init() {
       var nom = nomSpan.textContent.trim();
       var prenom = prenomSpan.textContent.trim();
       var telephone = telephoneSpan.textContent.trim();
-      var form = document.querySelector(".Formulaire");
+      
       form.style.display = "block";
       detailContact.style.display = "none";
       saveButton.removeEventListener("click", add_Contacts);
@@ -62,7 +58,7 @@ function init() {
         contactToUpdate.prenom = prenom;
         contactToUpdate.telephone = telephone;
         localStorage.setItem("contacts", JSON.stringify(contacts));
-        document.querySelector(".Formulaire").reset();
+        document.querySelector(".Form").reset();
         alert("Les informations du contact ont été mises à jour avec succès.");
         window.location.reload();
       }
@@ -71,7 +67,7 @@ function init() {
   saveButton.addEventListener("click", add_Contacts);
 
   addButton.onclick = function () {
-    formulaire.style.display = "block";
+    form.style.display = "block";
     detailContact.style.display = "none";
   };
   deleteButton.addEventListener("click", function () {
@@ -168,7 +164,6 @@ function findContact(telephone) {
   });
   }
 function showDetailContact(civilite, nom, prenom, telephone) {
-  var form = document.querySelector(".Formulaire");
   form.style.display = "none";
 
   if (detailContact) {
