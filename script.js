@@ -1,28 +1,10 @@
-
 var addButton = document.getElementById("btnAdd");
 var formulaire = document.querySelector(".Formulaire");
 var detailContact = document.querySelector(".detail_contact");
-
-addButton.onclick = function () {
-  formulaire.style.display = "block";
-  detailContact.style.display = "none";
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-  var saveButton = document.querySelector(".Enregistrer");
-
-  saveButton.addEventListener("click", add_Contacts);
-
-  var addButton = document.getElementById("btnAdd");
-  var formulaire = document.querySelector(".Formulaire");
-  var detailContact = document.querySelector(".detail_contact");
-
-  addButton.onclick = function () {
-    formulaire.style.display = "block";
-    detailContact.style.display = "none";
-  };
-});
-
+var saveButton = document.querySelector(".Enregistrer");
+var editButton = document.querySelector(".edit-button");
+var deleteButton = document.querySelector(".btnDelete");
+var contactsContainer = document.querySelector(".contactsContainer");
 function add_Contacts() {
   var civilite = document.getElementById("civilite").value;
   var prenom = document.getElementById("prenom").value;
@@ -65,35 +47,9 @@ function add_Contacts() {
   }
 }
 document.addEventListener("DOMContentLoaded", function () {
-    var deleteButton = document.querySelector(".btnDelete");
-  
-    deleteButton.addEventListener("click", function () {
-      localStorage.removeItem("contacts");
-  
-      var contactList = document.querySelectorAll(".Contact");
-  
-      contactList.forEach(function (contact) {
-        contact.remove();
-      });
-  
-      if (document.querySelectorAll(".Contact").length === 0) {
-        var noContactsMessage = document.querySelector(".noContactsMessage");
-        noContactsMessage.style.display = "block";
-      }
-    });
-  
-    if (document.querySelectorAll(".Contact").length === 0) {
-      var noContactsMessage = document.querySelector(".noContactsMessage");
-      noContactsMessage.style.display = "block";
-    }
-  });
-  
-var contactsContainer = document.querySelector(".contactsContainer");
-document.addEventListener("DOMContentLoaded", function () {
-    var editButton = document.querySelector(".edit-button");
+    
     editButton.addEventListener("click", editContact);
   
-    var saveButton = document.querySelector(".Enregistrer");
     saveButton.removeEventListener("click", add_Contacts);
     saveButton.addEventListener("click", saveContact);
   
@@ -147,12 +103,37 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.reload();
       }
     }
+    showContacts();
+  saveButton.addEventListener("click", add_Contacts);
+
+  addButton.onclick = function () {
+    formulaire.style.display = "block";
+    detailContact.style.display = "none";
+  };
+  deleteButton.addEventListener("click", function () {
+    localStorage.removeItem("contacts");
+
+    var contactList = document.querySelectorAll(".Contact");
+
+    contactList.forEach(function (contact) {
+      contact.remove();
+    });
+
+    if (document.querySelectorAll(".Contact").length === 0) {
+      var noContactsMessage = document.querySelector(".noContactsMessage");
+      noContactsMessage.style.display = "block";
+    }
+  });
+
+  if (document.querySelectorAll(".Contact").length === 0) {
+    var noContactsMessage = document.querySelector(".noContactsMessage");
+    noContactsMessage.style.display = "block";
+  }
   });
 contactsContainer.addEventListener("click", function (event) {
   var clickedContact = event.target.closest(".Contact");
   selectContact(clickedContact);
 });
-
 function selectContact(clickedContact) {
   document.querySelectorAll(".Contact.selected").forEach(function (contact) {
     contact.classList.remove("selected");
@@ -175,14 +156,12 @@ function selectContact(clickedContact) {
     }
   }
 }
-
 function find_contact(telephone) {
   var contactsList = JSON.parse(localStorage.getItem("contacts")) || [];
   return contactsList.find(function (contact) {
     return contact.telephone === telephone;
   });
 }
-
 function showDetailContact(civilite, nom, prenom, telephone) {
   var form = document.querySelector(".Formulaire");
   form.style.display = "none";
@@ -205,80 +184,11 @@ function showDetailContact(civilite, nom, prenom, telephone) {
     detailContactDiv.style.display = "block";
   }
 }
-
-var addButton = document.getElementById("btnAdd");
-var formulaire = document.querySelector(".Formulaire");
-var detailContact = document.querySelector(".detail_contact");
-
-addButton.onclick = function () {
-  formulaire.style.display = "block";
-  detailContact.style.display = "none";
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-  var saveButton = document.querySelector(".Enregistrer");
-
-  saveButton.addEventListener("click", add_Contacts);
-
-  var addButton = document.getElementById("btnAdd");
-  var formulaire = document.querySelector(".Formulaire");
-  var detailContact = document.querySelector(".detail_contact");
-
-  addButton.onclick = function () {
-    formulaire.style.display = "block";
-    detailContact.style.display = "none";
-  };
-});
-
-function add_Contacts() {
-  var civilite = document.getElementById("civilite").value;
-  var prenom = document.getElementById("prenom").value;
-  var nom = document.getElementById("nom").value;
-  var telephone = document.getElementById("telephone").value;
-
-  if (
-    civilite.trim() === "" ||
-    prenom.trim() === "" ||
-    nom.trim() === "" ||
-    telephone.trim() === ""
-  ) {
-    alert("Veuillez remplir tous les champs du formulaire.");
-    return;
-  }
-
-  var existingContacts = localStorage.getItem("contacts");
-  var contacts = existingContacts ? JSON.parse(existingContacts) : [];
-
-  var isDuplicate = contacts.some(function (contact) {
-    return contact.telephone === telephone;
-  });
-
-  if (isDuplicate) {
-    alert("Ce numéro de téléphone existe déjà dans les contacts.");
-  } else {
-    var contact = {
-      civilite: civilite,
-      prenom: prenom,
-      nom: nom,
-      telephone: telephone,
-    };
-
-    contacts.push(contact);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-
-    document.querySelector("form").reset();
-    alert("Le contact a été ajouté avec succès.");
-    location.reload();
-  }
-}
-
-
 function getContacts() {
     const savedContactsJSON = localStorage.getItem("contacts");
     return savedContactsJSON ? JSON.parse(savedContactsJSON) : [];
-  }
-  
-  function showContacts() {
+}
+function showContacts() {
     const saveList = document.querySelector(".SaveList");
     const contactsContainer = saveList.querySelector(".contactsContainer");
     const noContactsMessage = saveList.querySelector(".noContactsMessage");
@@ -303,12 +213,7 @@ function getContacts() {
       });
     }
   }
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    showContacts();
-  });
-  
-  function tri_contacts(contacts) {
+function tri_contacts(contacts) {
     contacts.sort((a, b) => {
       if (a.nom === b.nom) {
         return a.prenom.localeCompare(b.prenom);
