@@ -51,7 +51,7 @@ img {
 }
 .SaveList {
   background-color: rgba(125, 145, 156, 0.8);
-  height: fit-content; /*nshouf role mteeha*/
+  height: fit-content; 
   border-radius: 5px;
 }
 
@@ -96,7 +96,6 @@ p {
   cursor: pointer;
 }
 .form-container {
-  /* flex: 1;*/
   display: flex;
   float: right;
 }
@@ -158,7 +157,6 @@ select:focus > option:checked {
 }
 .detailContact {
   background-color: rgba(125, 145, 156, 0.8);
-  /* padding: 1rem 1rem 1rem 1rem;*/
   border-radius: 5px;
   height: fit-content;
   display: none;
@@ -194,19 +192,15 @@ select:focus > option:checked {
   padding: 0;
 }
 .contactIcon {
-  width: 30px; /* Adjust the width as needed */
-  height: 30px; /* Adjust the height as needed */
+  width: 30px; 
+  height: 30px; 
 }
 
 .Contact.selected {
   background-color: rgba(227, 80, 12, 0.965);
   cursor: pointer;
 }
-@media screen and (max-width: 1000px) {
-  #main_container {
-    grid-template-columns: 100%;
-  }
-}
+
 
 
 

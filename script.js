@@ -6,9 +6,10 @@ var deleteButton = document.querySelector(".Delete");
 var contactsContainer = document.querySelector(".contactsContainer");
 var saveList = document.querySelector(".SaveList");
 var noContacts = saveList.querySelector(".noContacts");
+var form = document.querySelector(".Form");
 document.addEventListener("DOMContentLoaded",init );
 contactsContainer.addEventListener("click", select);
-var form = document.querySelector(".Form");
+
 function init() {
     editButton.addEventListener("click", editContact);
     saveButton.removeEventListener("click", add_Contacts);
