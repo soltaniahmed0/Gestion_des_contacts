@@ -1,6 +1,6 @@
 var addButton = document.getElementById("Add");
 var detailContact = document.querySelector(".detailContact");
-var saveButton = document.querySelector(".Enregistrer");
+var saveButton = document.querySelector(".save");
 var editButton = document.querySelector(".edit");
 var deleteButton = document.querySelector(".Delete");
 var contactsContainer = document.querySelector(".contactsContainer");
