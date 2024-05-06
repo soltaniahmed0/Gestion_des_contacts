@@ -1,52 +1,16 @@
-var addButton = document.getElementById("btnAdd");
+var addButton = document.getElementById("Add");
 var formulaire = document.querySelector(".Formulaire");
-var detailContact = document.querySelector(".detail_contact");
+var detailContact = document.querySelector(".detailContact");
 var saveButton = document.querySelector(".Enregistrer");
 var editButton = document.querySelector(".edit-button");
 var deleteButton = document.querySelector(".btnDelete");
 var contactsContainer = document.querySelector(".contactsContainer");
-function add_Contacts() {
-  var civilite = document.getElementById("civilite").value;
-  var prenom = document.getElementById("prenom").value;
-  var nom = document.getElementById("nom").value;
-  var telephone = document.getElementById("telephone").value;
+var saveList = document.querySelector(".SaveList");
+var noContacts = saveList.querySelector(".noContacts");
+document.addEventListener("DOMContentLoaded",init );
+contactsContainer.addEventListener("click", select);
 
-  if (
-    civilite.trim() === "" ||
-    prenom.trim() === "" ||
-    nom.trim() === "" ||
-    telephone.trim() === ""
-  ) {
-    alert("Veuillez remplir tous les champs du formulaire.");
-    return;
-  }
-
-  var existingContacts = localStorage.getItem("contacts");
-  var contacts = existingContacts ? JSON.parse(existingContacts) : [];
-
-  var isDuplicate = contacts.some(function (contact) {
-    return contact.telephone === telephone;
-  });
-
-  if (isDuplicate) {
-    alert("Ce numéro de téléphone existe déjà dans les contacts.");
-  } else {
-    var contact = {
-      civilite: civilite,
-      prenom: prenom,
-      nom: nom,
-      telephone: telephone,
-    };
-
-    contacts.push(contact);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-
-    document.querySelector("form").reset();
-    alert("Le contact a été ajouté avec succès.");
-    location.reload();
-  }
-}
-document.addEventListener("DOMContentLoaded", function () {
+function init() {
     
     editButton.addEventListener("click", editContact);
   
@@ -120,20 +84,61 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (document.querySelectorAll(".Contact").length === 0) {
-      var noContactsMessage = document.querySelector(".noContactsMessage");
-      noContactsMessage.style.display = "block";
+      var noContacts = document.querySelector(".noContacts");
+      noContacts.style.display = "block";
     }
   });
 
   if (document.querySelectorAll(".Contact").length === 0) {
-    var noContactsMessage = document.querySelector(".noContactsMessage");
-    noContactsMessage.style.display = "block";
+    var noContacts = document.querySelector(".noContacts");
+    noContacts.style.display = "block";
   }
-  });
-contactsContainer.addEventListener("click", function (event) {
-  var clickedContact = event.target.closest(".Contact");
-  selectContact(clickedContact);
-});
+  }
+function select(event) {
+    var clickedContact = event.target.closest(".Contact");
+    selectContact(clickedContact);
+  }
+function add_Contacts() {
+    var civilite = document.getElementById("civilite").value;
+    var prenom = document.getElementById("prenom").value;
+    var nom = document.getElementById("nom").value;
+    var telephone = document.getElementById("telephone").value;
+  
+    if (
+      civilite.trim() === "" ||
+      prenom.trim() === "" ||
+      nom.trim() === "" ||
+      telephone.trim() === ""
+    ) {
+      alert("Veuillez remplir tous les champs du formulaire.");
+      return;
+    }
+  
+    var existingContacts = localStorage.getItem("contacts");
+    var contacts = existingContacts ? JSON.parse(existingContacts) : [];
+  
+    var isDuplicate = contacts.some(function (contact) {
+      return contact.telephone === telephone;
+    });
+  
+    if (isDuplicate) {
+      alert("Ce numéro de téléphone existe déjà dans les contacts.");
+    } else {
+      var contact = {
+        civilite: civilite,
+        prenom: prenom,
+        nom: nom,
+        telephone: telephone,
+      };
+  
+      contacts.push(contact);
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+  
+      document.querySelector("form").reset();
+      alert("Le contact a été ajouté avec succès.");
+      location.reload();
+    }
+  }
 function selectContact(clickedContact) {
   document.querySelectorAll(".Contact.selected").forEach(function (contact) {
     contact.classList.remove("selected");
@@ -143,7 +148,7 @@ function selectContact(clickedContact) {
     clickedContact.classList.add("selected");
 
     var telephone = clickedContact.getAttribute("data-telephone");
-    var foundContact = find_contact(telephone);
+    var foundContact = findContact(telephone);
 
     if (foundContact) {
       var civilite = foundContact.civilite;
@@ -155,24 +160,22 @@ function selectContact(clickedContact) {
       showDetailContact();
     }
   }
-}
-function find_contact(telephone) {
+  }
+function findContact(telephone) {
   var contactsList = JSON.parse(localStorage.getItem("contacts")) || [];
   return contactsList.find(function (contact) {
     return contact.telephone === telephone;
   });
-}
+  }
 function showDetailContact(civilite, nom, prenom, telephone) {
   var form = document.querySelector(".Formulaire");
   form.style.display = "none";
 
-  var detailContactDiv = document.querySelector(".detail_contact");
-
-  if (detailContactDiv) {
-    var civilitePara = detailContactDiv.querySelector(".civilite");
-    var nomPara = detailContactDiv.querySelector(".nom");
-    var prenomPara = detailContactDiv.querySelector(".prenom");
-    var telephonePara = detailContactDiv.querySelector(".telephone");
+  if (detailContact) {
+    var civilitePara = detailContact.querySelector(".civilite");
+    var nomPara = detailContact.querySelector(".nom");
+    var prenomPara = detailContact.querySelector(".prenom");
+    var telephonePara = detailContact.querySelector(".telephone");
 
     if (civilitePara && nomPara && prenomPara && telephonePara) {
       civilitePara.textContent = civilite || "";
@@ -181,39 +184,37 @@ function showDetailContact(civilite, nom, prenom, telephone) {
       telephonePara.textContent = telephone || "";
     }
 
-    detailContactDiv.style.display = "block";
+    detailContact.style.display = "block";
   }
-}
+  }
 function getContacts() {
     const savedContactsJSON = localStorage.getItem("contacts");
     return savedContactsJSON ? JSON.parse(savedContactsJSON) : [];
-}
+  }
 function showContacts() {
-    const saveList = document.querySelector(".SaveList");
-    const contactsContainer = saveList.querySelector(".contactsContainer");
-    const noContactsMessage = saveList.querySelector(".noContactsMessage");
+    
   
     const contacts = getContacts();
   
     if (contacts.length === 0) {
-      noContactsMessage.style.display = "block";
+      noContacts.style.display = "block";
     } else {
-      tri_contacts(contacts);
+      triContacts(contacts);
   
-      noContactsMessage.style.display = "none";
+      noContacts.style.display = "none";
   
       contacts.forEach((contact) => {
         const contactElement = document.createElement("div");
         contactElement.classList.add("Contact");
         contactElement.setAttribute("data-telephone", contact.telephone);
         contactElement.innerHTML = `
-                <h5><img src="images/contact-icon.png" alt="Profil">${contact.nom} ${contact.prenom}</h5>
+                <h5><img src="images/contact-icon.png" alt="Profil"> ${ contact.nom} ${contact.prenom}</h5>
             `;
         contactsContainer.appendChild(contactElement);
       });
     }
   }
-function tri_contacts(contacts) {
+function triContacts(contacts) {
     contacts.sort((a, b) => {
       if (a.nom === b.nom) {
         return a.prenom.localeCompare(b.prenom);

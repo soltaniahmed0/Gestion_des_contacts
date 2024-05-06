@@ -25,7 +25,7 @@ h1 {
   justify-content: center;
   gap: 0.5rem;
 }
-.btnAdd,
+.Add,
 .btnDelete {
   background-color: rgb(224, 78, 5);
   border-radius: 5px;
@@ -156,7 +156,7 @@ label {
 select:focus > option:checked {
   background: rgba(227, 80, 12, 0.965) !important;
 }
-.detail_contact {
+.detailContact {
   background-color: rgba(125, 145, 156, 0.8);
   /* padding: 1rem 1rem 1rem 1rem;*/
   border-radius: 5px;
