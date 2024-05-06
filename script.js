@@ -8,7 +8,7 @@ var saveList = document.querySelector(".SaveList");
 var noContacts = saveList.querySelector(".noContacts");
 var form = document.querySelector(".Form");
 document.addEventListener("DOMContentLoaded",init );
-contactsContainer.addEventListener("click", select);
+contactsContainer.addEventListener("click", selectContact);
 
 function init() {
     editButton.addEventListener("click", editContact);
@@ -91,10 +91,7 @@ function init() {
     noContacts.style.display = "block";
   }
   }
-function select(event) {
-    var clickedContact = event.target.closest(".Contact");
-    selectContact(clickedContact);
-  }
+
 function add_Contacts() {
     var civilite = document.getElementById("civilite").value;
     var prenom = document.getElementById("prenom").value;
@@ -136,7 +133,8 @@ function add_Contacts() {
       location.reload();
     }
   }
-function selectContact(clickedContact) {
+function selectContact(event) {
+  var clickedContact = event.target.closest(".Contact");
   document.querySelectorAll(".Contact.selected").forEach(function (contact) {
     contact.classList.remove("selected");
   });
