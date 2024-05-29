@@ -3,6 +3,7 @@ function add_Contacts() {
     var prenom = document.getElementById("prenom").value;
     var nom = document.getElementById("nom").value;
     var telephone = document.getElementById("telephone").value;
+    saveButton.removeEventListener("click", editContact);
   
     if (
       civilite.trim() === "" ||
@@ -13,17 +14,15 @@ function add_Contacts() {
       alert("Veuillez remplir tous les champs du formulaire.");
       return;
     }
+    
   
-    var existingContacts = localStorage.getItem("contacts");
-    var contacts = existingContacts ? JSON.parse(existingContacts) : [];
+    
   
-    var isDuplicate = contacts.some(function (contact) {
-      return contact.telephone === telephone;
-    });
-  
-    if (isDuplicate) {
-      alert("Ce numéro de téléphone existe déjà dans les contacts.");
-    } else {
+    
+    if(!validatePhoneNumber(telephone,contacts)){
+        return ;
+    }
+     else {
       var contact = {
         civilite: civilite,
         prenom: prenom,
@@ -39,3 +38,4 @@ function add_Contacts() {
       location.reload();
     }
   }
+  

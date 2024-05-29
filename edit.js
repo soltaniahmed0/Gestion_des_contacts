@@ -1,4 +1,4 @@
-contactsContainer.addEventListener("click", selectContact);
+
 function editContact() {
     var civiliteSpan = document.querySelector(".civilite");
     var nomSpan = document.querySelector(".nom");
@@ -25,27 +25,4 @@ function editContact() {
     saveButton.setAttribute("oldTel", telephone);
   }
 
-  function saveContact(event) {
-    event.preventDefault();
-    let oldTel = event.currentTarget.getAttribute("oldTel");
-    var civilite = document.querySelector("#civilite").value;
-    var nom = document.querySelector("#nom").value;
-    var prenom = document.querySelector("#prenom").value;
-    var telephone = document.querySelector("#telephone").value;
-    var existingContacts = localStorage.getItem("contacts");
-    var contacts = existingContacts ? JSON.parse(existingContacts) : [];
-    var contactToUpdate = contacts.find(function (contact) {
-      return contact.telephone === oldTel;
-    });
-
-    if (contactToUpdate) {
-      contactToUpdate.civilite = civilite;
-      contactToUpdate.nom = nom;
-      contactToUpdate.prenom = prenom;
-      contactToUpdate.telephone = telephone;
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-      document.querySelector(".Form").reset();
-      alert("Les informations du contact ont été mises à jour avec succès.");
-      window.location.reload();
-    }
-  }
+  

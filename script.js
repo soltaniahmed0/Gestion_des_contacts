@@ -8,7 +8,7 @@ var saveList = document.querySelector(".SaveList");
 var noContacts = saveList.querySelector(".noContacts");
 var form = document.querySelector(".Form");
 document.addEventListener("DOMContentLoaded",init );
-
+var contacts//=getContacts();
 
 function init() {
     editButton.addEventListener("click", editContact);
@@ -45,8 +45,8 @@ function getContacts() {
 function showContacts() {
     
   
-    const contacts = getContacts();
-  
+    
+  contacts=getContacts()
     if (contacts.length === 0) {
       noContacts.style.display = "block";
     } else {

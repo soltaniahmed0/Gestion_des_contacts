@@ -1,3 +1,4 @@
+contactsContainer.addEventListener("click", selectContact);
 function selectContact(event) {
     var clickedContact = event.target.closest(".Contact");
     document.querySelectorAll(".Contact.selected").forEach(function (contact) {
@@ -22,8 +23,8 @@ function selectContact(event) {
     }
     }
   function findContact(telephone) {
-    var contactsList = JSON.parse(localStorage.getItem("contacts")) || [];
-    return contactsList.find(function (contact) {
+    
+    return contacts.find(function (contact) {
       return contact.telephone === telephone;
     });
     }
